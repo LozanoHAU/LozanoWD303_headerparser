@@ -1,34 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Request Header Parser | Aaron Lozano</title>
+    <link
+      rel="shortcut icon"
+      href="https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Request Header Parser</h1>
+      <p class="tagline">Extract IP address, language, and software headers.</p>
+      <br />
 
-<html>
-
-   <head>
-      <title>Request Header Parser</title>
-      <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
-      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-      <link href="style.css" rel="stylesheet" type="text/css">
-   </head>
-
-   <body>
-      <div class="container">
-        <h1>Request Header Parser Microservice</h1>
-
-        <h2>Example Usage:</h2>
-        <p>
-          <a href="api/whoami">[base url]/api/whoami</a>
-        </p>
-
-        <h2>Example Output:</h2>
-        <p>
-          <code>{"ipaddress":"::ffff:159.20.14.100","language":"en-US,en;q=0.5",<br>"software":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:50.0) Gecko/20100101 Firefox/50.0"}</code>
-        </p>
+      <div class="buttons">
+        <button id="btnMe">Get My Headers</button>
       </div>
-      <div class="footer">
-        <p>
-          by <a href="https://www.freecodecamp.org">freeCodeCamp</a>
-        </p>
-      </div>
-   </body>
 
+      <pre id="outputBox"></pre>
 
+      <footer>
+        By
+        <a href="https://github.com/LozanoHAU/LozanoWD303_headerparser"
+          >Aaron Lozano</a
+        >
+      </footer>
+    </main>
+
+    <script>
+      const btnMe = document.getElementById("btnMe");
+      const outputBox = document.getElementById("outputBox");
+
+      async function fetchHeaders() {
+        const res = await fetch("/api/whoami");
+        const data = await res.json();
+        outputBox.textContent = JSON.stringify(data, null, 2);
+      }
+
+      btnMe.addEventListener("click", fetchHeaders);
+    </script>
+  </body>
 </html>
